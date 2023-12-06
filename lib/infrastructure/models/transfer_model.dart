@@ -2,7 +2,7 @@ class TransferModel {
     final int idTransfer;
     final int idAccountSender;
     final int idAccountReceiver;
-    final int amount;
+    final double amount;
     final DateTime dateIssue;
 
     TransferModel({

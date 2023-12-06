@@ -1,4 +1,5 @@
 import 'package:bank_mobile/presentation/providers/transfer_provider.dart';
+import 'package:bank_mobile/presentation/screens/bank_account/bank_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,6 @@ class TransferScreen extends StatelessWidget {
 class TransferBody extends StatefulWidget {
   final int user;
   final int idAccountSender;
-  
 
   const TransferBody({
     Key? key,
@@ -43,13 +43,16 @@ class TransferBody extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TransferBodyState createState() => _TransferBodyState();
+  _TransferBodyState createState() => _TransferBodyState(user: user, idAccountSender: idAccountSender);
 }
 
 class _TransferBodyState extends State<TransferBody> {
-
+  final int user;
+  final int idAccountSender;
   late int idAccountReceiver;
-  late int amount;
+  late double amount;
+
+  _TransferBodyState({required this.user, required this.idAccountSender});
 
   @override
   Widget build(BuildContext context) {
@@ -82,20 +85,25 @@ class _TransferBodyState extends State<TransferBody> {
             keyboardType: TextInputType.number,
             onChanged: (value) {
               setState(() {
-                amount = int.tryParse(value) ?? 0;
+                amount = double.tryParse(value ?? '0') ?? 0;
               });
             },
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
             onPressed: () async {
-              
-              final id = await transferProvider.createTransfer(
+              await transferProvider.createTransfer(
                 idAccountSender: widget.idAccountSender,
                 idAccountReceiver: idAccountReceiver,
                 amount: amount,
               );
-              print(id);
+              Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BankAccountScreen(
+                            user: user, ),
+                      ),
+                    );
+              
             },
             icon: const Icon(Icons.save),
             label: const Text('Crear Transferencia'),

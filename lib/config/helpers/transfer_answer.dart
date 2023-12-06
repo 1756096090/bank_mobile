@@ -10,7 +10,7 @@ class TransferAnswer{
   Future<int> createTransfer({
     required int idAccountSender,
     required int idAccountReceiver,
-    required int amount,
+    required double amount,
   }) async {
     final jsonTransfer = TransferModel(
         idAccountSender: idAccountSender,
