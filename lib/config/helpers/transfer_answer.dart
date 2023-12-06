@@ -25,4 +25,16 @@ class TransferAnswer{
 
     return response.data;
   }
+
+  Future<List<TransferModel>> getTransfer(int idAccountSender) async {
+    final String apiUrl = '$url/api/Transferencia/$idAccountSender/$idAccountSender';
+
+    final Response response = await _dio.get(apiUrl);
+
+    final List<TransferModel> transferencias = (response.data as List)
+        .map((transferencia) => TransferModel.fromJson(transferencia))
+        .toList();
+
+    return transferencias;
+  }
 }
