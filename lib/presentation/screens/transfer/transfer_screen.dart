@@ -1,5 +1,4 @@
 import 'package:bank_mobile/presentation/providers/transfer_provider.dart';
-import 'package:bank_mobile/presentation/screens/bank_account/bank_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +42,8 @@ class TransferBody extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TransferBodyState createState() => _TransferBodyState(user: user, idAccountSender: idAccountSender);
+  _TransferBodyState createState() =>
+      _TransferBodyState(user: user, idAccountSender: idAccountSender);
 }
 
 class _TransferBodyState extends State<TransferBody> {
@@ -97,13 +97,7 @@ class _TransferBodyState extends State<TransferBody> {
                 idAccountReceiver: idAccountReceiver,
                 amount: amount,
               );
-              Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => BankAccountScreen(
-                            user: user, ),
-                      ),
-                    );
-              
+              Navigator.of(context).pop();
             },
             icon: const Icon(Icons.save),
             label: const Text('Crear Transferencia'),

@@ -3,12 +3,17 @@ import 'package:bank_mobile/presentation/screens/transfer/transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BankAccountScreen extends StatelessWidget {
+class BankAccountScreen extends StatefulWidget {
   static const String name = 'bank_account_screen';
   final int user;
 
   const BankAccountScreen({Key? key, required this.user}) : super(key: key);
 
+  @override
+  State<BankAccountScreen> createState() => _BankAccountScreenState();
+}
+
+class _BankAccountScreenState extends State<BankAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -16,7 +21,8 @@ class BankAccountScreen extends StatelessWidget {
         ChangeNotifierProvider<BankAccountProvider>(
           lazy: false,
           create: (_) {
-            final bankAccountProvider = BankAccountProvider(user: user);
+            final bankAccountProvider = BankAccountProvider(user: widget.user);
+            
             return bankAccountProvider;
           },
         ),
@@ -26,7 +32,7 @@ class BankAccountScreen extends StatelessWidget {
           title: Text('Bank Account Details'),
         ),
         body: BankAccountDetailsWidget(
-          user: user,
+          user: widget.user,
         ),
       ),
     );
@@ -36,10 +42,14 @@ class BankAccountScreen extends StatelessWidget {
 class BankAccountDetailsWidget extends StatelessWidget {
   final int user;
 
-  const BankAccountDetailsWidget({super.key, required this.user});
+  const BankAccountDetailsWidget({Key? key, required this.user}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final bankAccountProvider = context.watch<BankAccountProvider>();
+    // Initialize BankAccountProvider here
+    final bankAccountProvider = Provider.of<BankAccountProvider>(context);
+    bankAccountProvider.initialize();
+
     final bankAccount = bankAccountProvider.bankAccount;
 
     if (bankAccount != null) {
@@ -57,7 +67,14 @@ class BankAccountDetailsWidget extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TransferScreen(
+                          user: user,
+                          idAccountSender: bankAccount.idAccount,
+                        ),
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.list_alt_outlined),
                   label: const Text('Lista de Transferencias'),
@@ -67,7 +84,9 @@ class BankAccountDetailsWidget extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => TransferScreen(
-                            user: user, idAccountSender: bankAccount.idAccount),
+                          user: user,
+                          idAccountSender: bankAccount.idAccount,
+                        ),
                       ),
                     );
                   },
@@ -86,3 +105,4 @@ class BankAccountDetailsWidget extends StatelessWidget {
     }
   }
 }
+
