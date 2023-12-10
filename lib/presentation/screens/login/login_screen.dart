@@ -74,7 +74,7 @@ class LoginBody extends StatelessWidget {
                 onPressed: () async {
                   final username = await loginProvider.getUser(context ,email, password);
 
-                  if (username != null) {
+                  if (username != 0) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => BankAccountScreen(user: username),

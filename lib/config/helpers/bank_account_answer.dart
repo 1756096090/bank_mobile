@@ -1,6 +1,9 @@
 
+
 import 'package:bank_mobile/infrastructure/models/bank_account_model.dart';
+import 'package:bank_mobile/presentation/shared/pop_up/pop_up_general.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 
 class BankAccountAnswer {
   static const String url =
@@ -12,18 +15,27 @@ class BankAccountAnswer {
 
     final Response response = await _dio.get(apiUrl);
 
-    final BankAccountModel  accountModel =BankAccountModel.fromJson(response.data);
+    final BankAccountModel accountModel =
+        BankAccountModel.fromJson(response.data);
 
     return accountModel;
   }
-  Future<BankAccountModel> putTransferAccount(int idSender, int idReceive, double amount) async {
+
+  Future<dynamic> putTransferAccount(
+      BuildContext context, int idSender, int idReceive, double amount) async {
     final String apiUrl = '$url/api/BankAccount/$idSender/$idReceive/$amount/';
 
-    final Response response = await _dio.put(apiUrl);
+    try {
+      final Response response = await _dio.put(apiUrl);
 
-    final BankAccountModel  accountModel =BankAccountModel.fromJson(response.data);
-
-    return accountModel;
+      final BankAccountModel accountModel =
+          BankAccountModel.fromJson(response.data);
+      PopUpGeneral.showMessage(context, 'Transferencia realizada');
+      return response.data;
+    } catch (e) {
+      PopUpGeneral.showMessage(context, 'Error al obtener la cuenta');
+      return null;
+    }
   }
 
   Future<int> createBankAccount(int idUser) async {
@@ -33,8 +45,8 @@ class BankAccountAnswer {
       apiUrl,
       data: {
         "idUser": idUser,
-        "accountNumber": 0, 
-        "accountAmount":0,
+        "accountNumber": 0,
+        "accountAmount": 0,
       },
     );
 

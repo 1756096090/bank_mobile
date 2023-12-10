@@ -21,9 +21,6 @@ class UserAnswer {
     final Response response = await _dio.get(apiUrl);
 
     final userModel = UserModel.fromJson(response.data);
-
-
-    PopUpGeneral.showMessage(context, 'Usuario ID: ${userModel.idUser}');
     
     return userModel.idUser;
   } catch (e) {

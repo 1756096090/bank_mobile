@@ -14,13 +14,9 @@ class TransferScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<TransferProvider>(
-          lazy: false,
-          create: (_) => TransferProvider(),
-        ),
-      ],
+    return ChangeNotifierProvider<TransferProvider>(
+      create: (_) => TransferProvider(),
+      lazy: false,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Transferencia'),
@@ -85,19 +81,21 @@ class _TransferBodyState extends State<TransferBody> {
             keyboardType: TextInputType.number,
             onChanged: (value) {
               setState(() {
-                amount = double.tryParse(value ?? '0') ?? 0;
+                amount = double.tryParse(value) ?? 0;
               });
             },
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
             onPressed: () async {
-              await transferProvider.createTransfer(
+              final response = await transferProvider.createTransfer(
+                context: context,
                 idAccountSender: widget.idAccountSender,
                 idAccountReceiver: idAccountReceiver,
                 amount: amount,
               );
               Navigator.of(context).pop();
+              
             },
             icon: const Icon(Icons.save),
             label: const Text('Crear Transferencia'),
