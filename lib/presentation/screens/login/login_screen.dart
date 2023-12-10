@@ -1,5 +1,6 @@
 import 'package:bank_mobile/presentation/screens/bank_account/bank_account_screen.dart';
 import 'package:bank_mobile/presentation/providers/login_provider.dart';
+import 'package:bank_mobile/presentation/screens/registation/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,10 +63,16 @@ class LoginBody extends StatelessWidget {
                   password = value;
                 },
               ),
-              TextButton(onPressed: () {}, child: const Text('Registrarse...')),
+              TextButton(onPressed: () {
+                Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RegistrationScreen(),
+                      ),
+                    ); 
+              }, child: const Text('Registrarse...')),
               ElevatedButton(
                 onPressed: () async {
-                  final username = await loginProvider.getUser(email, password);
+                  final username = await loginProvider.getUser(context ,email, password);
 
                   if (username != null) {
                     Navigator.of(context).push(

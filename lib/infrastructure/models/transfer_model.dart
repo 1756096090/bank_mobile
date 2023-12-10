@@ -17,7 +17,7 @@ class TransferModel {
         idTransfer: json["idTransfer"],
         idAccountSender: json["idAccountSender"],
         idAccountReceiver: json["idAccountReceiver"],
-        amount: json["amount"],
+        amount: json["amount"].toDouble(),
         dateIssue: DateTime.parse(json["dateIssue"]),
     );
 

@@ -3,26 +3,35 @@ import 'package:bank_mobile/presentation/providers/list_transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ListTransferScreen extends StatelessWidget {
+class ListTransferScreen extends StatefulWidget {
   final int idAccount;
-  const ListTransferScreen({Key? key, required this.idAccount});
+
+  const ListTransferScreen({Key? key, required this.idAccount}) : super(key: key);
+
+  @override
+  _ListTransferScreenState createState() => _ListTransferScreenState();
+}
+
+class _ListTransferScreenState extends State<ListTransferScreen> {
+  late ListTransferProvider listTransferProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    listTransferProvider = ListTransferProvider();
+    listTransferProvider.getListTransfer(widget.idAccount); // Inicialización aquí
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<ListTransferProvider>(
-          lazy: false,
-          create: (_) => ListTransferProvider(),
-        ),
-      ],
+    return ChangeNotifierProvider<ListTransferProvider>(
+      lazy: false,
+      create: (_) => listTransferProvider,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Lista de transferencias'),
         ),
-        body: ListTransferBody(
-          idAccount: idAccount,
-        ),
+        body: ListTransferBody(idAccount: widget.idAccount),
       ),
     );
   }
@@ -37,12 +46,13 @@ class ListTransferBody extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     final listTransferProvider = context.watch<ListTransferProvider>();
-    final transferencias = ListTransferProvider().getListTransfer(idAccount);
-    final List<TransferModel> listTransfer = listTransferProvider.transferencias;
+    final List<TransferModel> listTransfer =
+        listTransferProvider.transferencias;
 
-    return PageView.builder(
+
+    return ListView.builder(
       scrollDirection: Axis.vertical,
       physics: const BouncingScrollPhysics(),
       itemCount: listTransfer.length,

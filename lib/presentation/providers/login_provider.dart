@@ -5,10 +5,14 @@ class LoginProvider extends ChangeNotifier {
   int user = 0;
   
 
-  Future<int> getUser(String mail, String password) async {
-    final response = await UserAnswer().getUserByIdAndPassword(mail, password);
+  Future<int> getUser(BuildContext context,String mail, String password) async {
+    final response = await UserAnswer().getUserByIdAndPassword(context,mail, password);
+    if (response == null) {
+      return 0;
+    }
     user = response;
     notifyListeners();
     return user;
   }
 }
+

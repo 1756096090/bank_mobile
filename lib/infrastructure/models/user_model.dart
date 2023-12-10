@@ -28,5 +28,17 @@ class UserModel {
         dni: json["dni"],
     );
 
+    Map<String, dynamic> toJson() => {
+        "idUser": idUser,
+        "name": name,
+        "email": email,
+        "password": password,
+        "phone": phone,
+        "role": role,
+        "dni": dni,
+    };
+
+
+
 
 }

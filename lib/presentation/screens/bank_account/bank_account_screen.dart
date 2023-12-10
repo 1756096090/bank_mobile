@@ -1,4 +1,5 @@
 import 'package:bank_mobile/presentation/providers/bank_account_provider.dart';
+import 'package:bank_mobile/presentation/screens/list_transfer/list_transfer_screen.dart';
 import 'package:bank_mobile/presentation/screens/transfer/transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,6 @@ class _BankAccountScreenState extends State<BankAccountScreen> {
           lazy: false,
           create: (_) {
             final bankAccountProvider = BankAccountProvider(user: widget.user);
-            
             return bankAccountProvider;
           },
         ),
@@ -46,7 +46,6 @@ class BankAccountDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize BankAccountProvider here
     final bankAccountProvider = Provider.of<BankAccountProvider>(context);
     bankAccountProvider.initialize();
 
@@ -69,9 +68,8 @@ class BankAccountDetailsWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => TransferScreen(
-                          user: user,
-                          idAccountSender: bankAccount.idAccount,
+                        builder: (context) => ListTransferScreen(
+                          idAccount: bankAccount.idAccount,
                         ),
                       ),
                     );

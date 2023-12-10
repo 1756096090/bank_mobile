@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:bank_mobile/infrastructure/models/bank_account_model.dart';
 import 'package:dio/dio.dart';
@@ -25,5 +24,20 @@ class BankAccountAnswer {
     final BankAccountModel  accountModel =BankAccountModel.fromJson(response.data);
 
     return accountModel;
+  }
+
+  Future<int> createBankAccount(int idUser) async {
+    const String apiUrl = '$url/api/BankAccount';
+
+    final Response response = await _dio.post(
+      apiUrl,
+      data: {
+        "idUser": idUser,
+        "accountNumber": 0, 
+        "accountAmount":0,
+      },
+    );
+
+    return response.data;
   }
 }
