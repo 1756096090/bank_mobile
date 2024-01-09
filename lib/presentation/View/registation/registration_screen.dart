@@ -1,4 +1,4 @@
-import 'package:bank_mobile/presentation/providers/registration_provider.dart';
+import 'package:bank_mobile/presentation/View-Model/registration_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

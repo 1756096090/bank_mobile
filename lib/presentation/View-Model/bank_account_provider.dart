@@ -1,4 +1,4 @@
-import 'package:bank_mobile/config/helpers/bank_account_answer.dart';
+import 'package:bank_mobile/config/Model/bank_account_answer.dart';
 import 'package:bank_mobile/infrastructure/models/bank_account_model.dart';
 import 'package:flutter/material.dart';
 

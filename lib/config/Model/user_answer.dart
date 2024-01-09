@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bank_mobile/config/helpers/bank_account_answer.dart';
+import 'package:bank_mobile/config/Model/bank_account_answer.dart';
 import 'package:bank_mobile/infrastructure/models/user_model.dart';
 import 'package:bank_mobile/presentation/shared/pop_up/pop_up_general.dart';
 import 'package:dio/dio.dart';

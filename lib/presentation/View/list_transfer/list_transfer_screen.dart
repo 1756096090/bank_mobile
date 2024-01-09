@@ -1,5 +1,5 @@
 import 'package:bank_mobile/infrastructure/models/transfer_model.dart';
-import 'package:bank_mobile/presentation/providers/list_transfer_provider.dart';
+import 'package:bank_mobile/presentation/View-Model/list_transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

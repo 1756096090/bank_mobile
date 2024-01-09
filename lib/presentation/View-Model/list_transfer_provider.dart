@@ -1,4 +1,4 @@
-import 'package:bank_mobile/config/helpers/transfer_answer.dart';
+import 'package:bank_mobile/config/Model/transfer_answer.dart';
 import 'package:bank_mobile/infrastructure/models/transfer_model.dart';
 import 'package:flutter/material.dart';
 

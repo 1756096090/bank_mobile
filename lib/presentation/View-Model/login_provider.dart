@@ -1,4 +1,4 @@
-import 'package:bank_mobile/config/helpers/user_answer.dart';
+import 'package:bank_mobile/config/Model/user_answer.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {

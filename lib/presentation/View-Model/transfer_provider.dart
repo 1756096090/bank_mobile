@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:bank_mobile/config/helpers/bank_account_answer.dart';
-import 'package:bank_mobile/config/helpers/transfer_answer.dart';
+import 'package:bank_mobile/config/Model/bank_account_answer.dart';
+import 'package:bank_mobile/config/Model/transfer_answer.dart';
 import 'package:flutter/material.dart';
 
 class TransferProvider extends ChangeNotifier {

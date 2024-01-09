@@ -1,6 +1,6 @@
-import 'package:bank_mobile/presentation/providers/bank_account_provider.dart';
-import 'package:bank_mobile/presentation/screens/list_transfer/list_transfer_screen.dart';
-import 'package:bank_mobile/presentation/screens/transfer/transfer_screen.dart';
+import 'package:bank_mobile/presentation/View-Model/bank_account_provider.dart';
+import 'package:bank_mobile/presentation/View/list_transfer/list_transfer_screen.dart';
+import 'package:bank_mobile/presentation/View/transfer/transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

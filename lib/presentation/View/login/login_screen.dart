@@ -1,6 +1,6 @@
-import 'package:bank_mobile/presentation/screens/bank_account/bank_account_screen.dart';
-import 'package:bank_mobile/presentation/providers/login_provider.dart';
-import 'package:bank_mobile/presentation/screens/registation/registration_screen.dart';
+import 'package:bank_mobile/presentation/View/bank_account/bank_account_screen.dart';
+import 'package:bank_mobile/presentation/View-Model/login_provider.dart';
+import 'package:bank_mobile/presentation/View/registation/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
